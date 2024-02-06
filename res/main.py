@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ###########################################################################
-## Python code generated with wxFormBuilder (version 3.10.1-11d0e73)
+## Python code generated with wxFormBuilder (version 4.0.0-0-g0efcecf)
 ## http://www.wxformbuilder.org/
 ##
 ## PLEASE DO *NOT* EDIT THIS FILE!
@@ -10,6 +10,7 @@
 import wx
 import wx.xrc
 import wx.richtext
+import wx.stc
 
 ###########################################################################
 ## Class main
@@ -240,8 +241,6 @@ class main ( wx.Frame ):
 		bSizer611111.Add( self.bHardReset, 0, wx.ALL, 5 )
 
 		self.bExecScript = wx.Button( self.dPage1, wx.ID_ANY, u"Execute Script", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.bExecScript.Enable( False )
-
 		bSizer611111.Add( self.bExecScript, 1, wx.ALL, 5 )
 
 		self.bExecLoader = wx.Button( self.dPage1, wx.ID_ANY, u"Load DCC", wx.DefaultPosition, wx.DefaultSize, 0 )
@@ -745,6 +744,925 @@ class main ( wx.Frame ):
 		event.Skip()
 
 	def doRegenUUID( self, event ):
+		event.Skip()
+
+
+###########################################################################
+## Class forwardDialog
+###########################################################################
+
+class forwardDialog ( wx.Dialog ):
+
+	def __init__( self, parent ):
+		wx.Dialog.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, pos = wx.DefaultPosition, size = wx.Size( 384,229 ), style = wx.CAPTION|wx.SYSTEM_MENU )
+
+		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
+
+		bSizer23 = wx.BoxSizer( wx.VERTICAL )
+
+		self.lPin = wx.StaticText( self, wx.ID_ANY, u"Your Instance Code is:", wx.DefaultPosition, wx.DefaultSize, wx.ALIGN_CENTER_HORIZONTAL )
+		self.lPin.Wrap( -1 )
+
+		self.lPin.SetFont( wx.Font( 18, wx.FONTFAMILY_SWISS, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, "Sans" ) )
+		self.lPin.SetMinSize( wx.Size( -1,30 ) )
+
+		bSizer23.Add( self.lPin, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.EXPAND, 5 )
+
+		self.lConnect = wx.StaticText( self, wx.ID_ANY, u"Ready to Connect. Time your\nJTAG interface connection\n(click Connect)\nAuto-connect in 15 seconds.", wx.DefaultPosition, wx.DefaultSize, wx.ALIGN_CENTER_HORIZONTAL )
+		self.lConnect.Wrap( -1 )
+
+		self.lConnect.SetFont( wx.Font( 16, wx.FONTFAMILY_SWISS, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, "Sans" ) )
+		self.lConnect.Hide()
+		self.lConnect.SetMinSize( wx.Size( -1,30 ) )
+
+		bSizer23.Add( self.lConnect, 1, wx.ALL|wx.EXPAND, 5 )
+
+		self.tPin = wx.TextCtrl( self, wx.ID_ANY, u"1a2b3c4d", wx.DefaultPosition, wx.DefaultSize, wx.TE_CENTER|wx.TE_READONLY )
+		self.tPin.SetFont( wx.Font( 32, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, wx.EmptyString ) )
+
+		bSizer23.Add( self.tPin, 1, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.EXPAND, 5 )
+
+		self.status = wx.richtext.RichTextCtrl( self, wx.ID_ANY, u"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ac libero vel massa tristique ullamcorper ac et quam. Nunc ultricies dui nibh, ac auctor augue pulvinar sit amet. Nulla malesuada, arcu eu aliquet semper, leo est tincidunt ante, id aliquet tortor leo vel ex. Suspendisse orci lorem, molestie in auctor in, lacinia a felis. Nam molestie sagittis rutrum. Pellentesque tellus mi, posuere sed bibendum quis, laoreet a dui. In vehicula feugiat est, sit amet pellentesque neque porta sit amet. Nam in elit malesuada, imperdiet dolor eu, maximus elit.\n\nDuis tincidunt ante at massa ornare, in vehicula dolor bibendum. Integer eu est interdum, malesuada ex id, rhoncus lectus. Nullam elementum orci in tellus vestibulum porttitor. Etiam vel lectus aliquet, iaculis erat ac, convallis tortor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed bibendum ultrices tempus. Cras diam felis, sodales a lacinia non, rutrum sit amet nisl. Cras dapibus, ex vitae fringilla convallis, mi lacus faucibus lorem, a aliquam ligula orci in quam. Fusce eu erat maximus, volutpat mauris quis, egestas dolor.\n\nPellentesque elementum ultrices dignissim. Integer bibendum elementum auctor. Nulla facilisi. Integer tristique bibendum facilisis. Morbi id risus molestie, tempor diam non, dignissim mauris. In sit amet orci id tellus fringilla cursus. Nam rhoncus lectus a nibh congue, at fermentum elit accumsan. Proin congue nunc velit, at tempor arcu vulputate vitae. Aenean ac diam quis neque gravida ullamcorper. Pellentesque ac erat ex.\n\nMauris lectus risus, consequat quis eros vitae, feugiat fermentum purus. Aenean risus ipsum, dignissim quis consectetur hendrerit, ultrices sed velit. Duis maximus massa tellus, at blandit elit fringilla nec. Ut luctus facilisis mi, non vehicula lorem sagittis vel. Morbi gravida lacus eu sapien condimentum gravida. Vestibulum consectetur auctor est ac efficitur. Aliquam aliquam commodo nibh. Proin ultricies porttitor arcu id accumsan. Maecenas quam eros, egestas vitae fermentum laoreet, efficitur at lacus.\n\nCurabitur id erat eu sapien volutpat ullamcorper. Nulla volutpat dignissim varius. Duis vulputate imperdiet tincidunt. Aenean in leo feugiat, rhoncus erat quis, sollicitudin sapien. Vivamus imperdiet turpis sit amet velit tristique, in dictum dolor pharetra. Duis efficitur magna nec hendrerit congue. In vel luctus purus. ", wx.DefaultPosition, wx.DefaultSize, wx.TE_READONLY|wx.VSCROLL|wx.HSCROLL|wx.NO_BORDER|wx.WANTS_CHARS )
+		self.status.Hide()
+
+		bSizer23.Add( self.status, 1, wx.EXPAND |wx.ALL, 5 )
+
+		gSizer3 = wx.GridSizer( 0, 2, 0, 0 )
+
+		self.bStop = wx.Button( self, wx.ID_ANY, u"Stop", wx.DefaultPosition, wx.DefaultSize, 0 )
+		gSizer3.Add( self.bStop, 0, wx.ALL, 5 )
+
+		self.bConnect = wx.Button( self, wx.ID_ANY, u"Connect", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.bConnect.Enable( False )
+
+		gSizer3.Add( self.bConnect, 0, wx.ALL|wx.ALIGN_RIGHT, 5 )
+
+
+		bSizer23.Add( gSizer3, 0, wx.EXPAND, 5 )
+
+
+		self.SetSizer( bSizer23 )
+		self.Layout()
+		self.pConnectTimeout = wx.Timer()
+		self.pConnectTimeout.SetOwner( self, self.pConnectTimeout.GetId() )
+
+		self.Centre( wx.BOTH )
+
+		# Connect Events
+		self.Bind( wx.EVT_IDLE, self.doLoop )
+		self.bStop.Bind( wx.EVT_BUTTON, self.doStop )
+		self.bConnect.Bind( wx.EVT_BUTTON, self.doConnect )
+		self.Bind( wx.EVT_TIMER, self.doConnectTimeout, id=self.pConnectTimeout.GetId() )
+
+	def __del__( self ):
+		pass
+
+
+	# Virtual event handlers, override them in your derived class
+	def doLoop( self, event ):
+		event.Skip()
+
+	def doStop( self, event ):
+		event.Skip()
+
+	def doConnect( self, event ):
+		event.Skip()
+
+	def doConnectTimeout( self, event ):
+		event.Skip()
+
+
+###########################################################################
+## Class FT232H_Pin_Config
+###########################################################################
+
+class FT232H_Pin_Config ( wx.Dialog ):
+
+	def __init__( self, parent ):
+		wx.Dialog.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, pos = wx.DefaultPosition, size = wx.Size( 650,565 ), style = wx.DEFAULT_DIALOG_STYLE )
+
+		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
+
+		bSizer33 = wx.BoxSizer( wx.VERTICAL )
+
+		bSizer29 = wx.BoxSizer( wx.HORIZONTAL )
+
+		self.l_Board = wx.StaticText( self, wx.ID_ANY, u"Board:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.l_Board.Wrap( -1 )
+
+		self.l_Board.SetFont( wx.Font( 14, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, wx.EmptyString ) )
+		self.l_Board.SetMinSize( wx.Size( 72,20 ) )
+
+		bSizer29.Add( self.l_Board, 1, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+
+		c_BoardChoices = []
+		self.c_Board = wx.Choice( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, c_BoardChoices, 0 )
+		self.c_Board.SetSelection( 0 )
+		bSizer29.Add( self.c_Board, 0, wx.ALL|wx.ALIGN_RIGHT|wx.ALIGN_CENTER_VERTICAL, 5 )
+
+
+		bSizer33.Add( bSizer29, 0, wx.ALIGN_RIGHT, 5 )
+
+		bSizer27 = wx.BoxSizer( wx.HORIZONTAL )
+
+		bSizer36 = wx.BoxSizer( wx.VERTICAL )
+
+		cfg_p10Choices = [ u"TDI", u"TDO", u"TCK", u"TMS", u"TRST", u"SRST", u"High", u"Low", u"RTCK" ]
+		self.cfg_p10 = wx.Choice( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, cfg_p10Choices, 0 )
+		self.cfg_p10.SetSelection( 6 )
+		bSizer36.Add( self.cfg_p10, 0, wx.ALL|wx.ALIGN_RIGHT, 5 )
+
+		self.m_staticline1 = wx.StaticLine( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL )
+		bSizer36.Add( self.m_staticline1, 0, wx.EXPAND |wx.ALL, 5 )
+
+		cfg_p11Choices = [ u"TDI", u"TDO", u"TCK", u"TMS", u"TRST", u"SRST", u"High", u"Low", u"RTCK" ]
+		self.cfg_p11 = wx.Choice( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, cfg_p11Choices, 0 )
+		self.cfg_p11.SetSelection( 6 )
+		bSizer36.Add( self.cfg_p11, 0, wx.ALL|wx.ALIGN_RIGHT, 5 )
+
+		self.m_staticline2 = wx.StaticLine( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL )
+		bSizer36.Add( self.m_staticline2, 0, wx.EXPAND |wx.ALL, 5 )
+
+		cfg_p12Choices = [ u"TDI", u"TDO", u"TCK", u"TMS", u"TRST", u"SRST", u"High", u"Low", u"RTCK" ]
+		self.cfg_p12 = wx.Choice( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, cfg_p12Choices, 0 )
+		self.cfg_p12.SetSelection( 6 )
+		bSizer36.Add( self.cfg_p12, 0, wx.ALL|wx.ALIGN_RIGHT, 5 )
+
+		self.m_staticline3 = wx.StaticLine( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL )
+		bSizer36.Add( self.m_staticline3, 0, wx.EXPAND |wx.ALL, 5 )
+
+		cfg_p13Choices = [ u"TDI", u"TDO", u"TCK", u"TMS", u"TRST", u"SRST", u"High", u"Low", u"RTCK" ]
+		self.cfg_p13 = wx.Choice( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, cfg_p13Choices, 0 )
+		self.cfg_p13.SetSelection( 6 )
+		bSizer36.Add( self.cfg_p13, 0, wx.ALL|wx.ALIGN_RIGHT, 5 )
+
+		self.m_staticline4 = wx.StaticLine( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL )
+		bSizer36.Add( self.m_staticline4, 0, wx.EXPAND |wx.ALL, 5 )
+
+		cfg_p14Choices = [ u"TDI", u"TDO", u"TCK", u"TMS", u"TRST", u"SRST", u"High", u"Low", u"RTCK" ]
+		self.cfg_p14 = wx.Choice( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, cfg_p14Choices, 0 )
+		self.cfg_p14.SetSelection( 6 )
+		bSizer36.Add( self.cfg_p14, 0, wx.ALL|wx.ALIGN_RIGHT, 5 )
+
+		self.m_staticline5 = wx.StaticLine( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL )
+		bSizer36.Add( self.m_staticline5, 0, wx.EXPAND |wx.ALL, 5 )
+
+		cfg_p15Choices = [ u"TDI", u"TDO", u"TCK", u"TMS", u"TRST", u"SRST", u"High", u"Low", u"RTCK" ]
+		self.cfg_p15 = wx.Choice( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, cfg_p15Choices, 0 )
+		self.cfg_p15.SetSelection( 6 )
+		bSizer36.Add( self.cfg_p15, 0, wx.ALL|wx.ALIGN_RIGHT, 5 )
+
+		self.m_staticline6 = wx.StaticLine( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL )
+		bSizer36.Add( self.m_staticline6, 0, wx.EXPAND |wx.ALL, 5 )
+
+		cfg_p16Choices = [ u"TDI", u"TDO", u"TCK", u"TMS", u"TRST", u"SRST", u"High", u"Low", u"RTCK" ]
+		self.cfg_p16 = wx.Choice( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, cfg_p16Choices, 0 )
+		self.cfg_p16.SetSelection( 6 )
+		bSizer36.Add( self.cfg_p16, 0, wx.ALL|wx.ALIGN_RIGHT, 5 )
+
+		self.m_staticline7 = wx.StaticLine( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL )
+		bSizer36.Add( self.m_staticline7, 0, wx.EXPAND |wx.ALL, 5 )
+
+		cfg_p17Choices = [ u"TDI", u"TDO", u"TCK", u"TMS", u"TRST", u"SRST", u"High", u"Low", u"RTCK" ]
+		self.cfg_p17 = wx.Choice( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, cfg_p17Choices, 0 )
+		self.cfg_p17.SetSelection( 6 )
+		bSizer36.Add( self.cfg_p17, 0, wx.ALL|wx.ALIGN_RIGHT, 5 )
+
+		self.m_staticline8 = wx.StaticLine( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL )
+		bSizer36.Add( self.m_staticline8, 0, wx.EXPAND |wx.ALL, 5 )
+
+
+		bSizer27.Add( bSizer36, 1, wx.EXPAND, 5 )
+
+		self.board = wx.StaticBitmap( self, wx.ID_ANY, wx.NullBitmap, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.board.SetMaxSize( wx.Size( 250,440 ) )
+
+		bSizer27.Add( self.board, 1, wx.ALL|wx.ALIGN_CENTER_VERTICAL|wx.EXPAND, 5 )
+
+		bSizer361 = wx.BoxSizer( wx.VERTICAL )
+
+		cfg_p20Choices = [ u"TDI", u"TDO", u"TCK", u"TMS", u"TRST", u"SRST", u"High", u"Low", u"RTCK" ]
+		self.cfg_p20 = wx.Choice( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, cfg_p20Choices, 0 )
+		self.cfg_p20.SetSelection( 6 )
+		bSizer361.Add( self.cfg_p20, 0, wx.ALL, 5 )
+
+		self.m_staticline9 = wx.StaticLine( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL )
+		bSizer361.Add( self.m_staticline9, 0, wx.EXPAND |wx.ALL, 5 )
+
+		cfg_p21Choices = [ u"TDI", u"TDO", u"TCK", u"TMS", u"TRST", u"SRST", u"High", u"Low", u"RTCK" ]
+		self.cfg_p21 = wx.Choice( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, cfg_p21Choices, 0 )
+		self.cfg_p21.SetSelection( 6 )
+		bSizer361.Add( self.cfg_p21, 0, wx.ALL, 5 )
+
+		self.m_staticline10 = wx.StaticLine( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL )
+		bSizer361.Add( self.m_staticline10, 0, wx.EXPAND |wx.ALL, 5 )
+
+		cfg_p22Choices = [ u"TDI", u"TDO", u"TCK", u"TMS", u"TRST", u"SRST", u"High", u"Low", u"RTCK" ]
+		self.cfg_p22 = wx.Choice( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, cfg_p22Choices, 0 )
+		self.cfg_p22.SetSelection( 6 )
+		bSizer361.Add( self.cfg_p22, 0, wx.ALL, 5 )
+
+		self.m_staticline11 = wx.StaticLine( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL )
+		bSizer361.Add( self.m_staticline11, 0, wx.EXPAND |wx.ALL, 5 )
+
+		cfg_p23Choices = [ u"TDI", u"TDO", u"TCK", u"TMS", u"TRST", u"SRST", u"High", u"Low", u"RTCK" ]
+		self.cfg_p23 = wx.Choice( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, cfg_p23Choices, 0 )
+		self.cfg_p23.SetSelection( 6 )
+		bSizer361.Add( self.cfg_p23, 0, wx.ALL, 5 )
+
+		self.m_staticline12 = wx.StaticLine( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL )
+		bSizer361.Add( self.m_staticline12, 0, wx.EXPAND |wx.ALL, 5 )
+
+		cfg_p24Choices = [ u"TDI", u"TDO", u"TCK", u"TMS", u"TRST", u"SRST", u"High", u"Low", u"RTCK" ]
+		self.cfg_p24 = wx.Choice( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, cfg_p24Choices, 0 )
+		self.cfg_p24.SetSelection( 6 )
+		bSizer361.Add( self.cfg_p24, 0, wx.ALL, 5 )
+
+		self.m_staticline13 = wx.StaticLine( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL )
+		bSizer361.Add( self.m_staticline13, 0, wx.EXPAND |wx.ALL, 5 )
+
+		cfg_p25Choices = [ u"TDI", u"TDO", u"TCK", u"TMS", u"TRST", u"SRST", u"High", u"Low", u"RTCK" ]
+		self.cfg_p25 = wx.Choice( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, cfg_p25Choices, 0 )
+		self.cfg_p25.SetSelection( 6 )
+		bSizer361.Add( self.cfg_p25, 0, wx.ALL, 5 )
+
+		self.m_staticline14 = wx.StaticLine( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL )
+		bSizer361.Add( self.m_staticline14, 0, wx.EXPAND |wx.ALL, 5 )
+
+		cfg_p26Choices = [ u"TDI", u"TDO", u"TCK", u"TMS", u"TRST", u"SRST", u"High", u"Low", u"RTCK" ]
+		self.cfg_p26 = wx.Choice( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, cfg_p26Choices, 0 )
+		self.cfg_p26.SetSelection( 6 )
+		bSizer361.Add( self.cfg_p26, 0, wx.ALL, 5 )
+
+		self.m_staticline15 = wx.StaticLine( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL )
+		bSizer361.Add( self.m_staticline15, 0, wx.EXPAND |wx.ALL, 5 )
+
+		cfg_p27Choices = [ u"TDI", u"TDO", u"TCK", u"TMS", u"TRST", u"SRST", u"High", u"Low", u"RTCK" ]
+		self.cfg_p27 = wx.Choice( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, cfg_p27Choices, 0 )
+		self.cfg_p27.SetSelection( 6 )
+		bSizer361.Add( self.cfg_p27, 0, wx.ALL, 5 )
+
+		self.m_staticline16 = wx.StaticLine( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL )
+		bSizer361.Add( self.m_staticline16, 0, wx.EXPAND |wx.ALL, 5 )
+
+
+		bSizer27.Add( bSizer361, 1, wx.EXPAND, 5 )
+
+
+		bSizer33.Add( bSizer27, 1, wx.EXPAND|wx.ALIGN_RIGHT, 5 )
+
+		bSizer28 = wx.BoxSizer( wx.HORIZONTAL )
+
+		self.bApply = wx.Button( self, wx.ID_ANY, u"Apply", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer28.Add( self.bApply, 0, wx.ALL, 5 )
+
+		self.bCancel = wx.Button( self, wx.ID_ANY, u"Cancel", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer28.Add( self.bCancel, 0, wx.ALL, 5 )
+
+		self.bReset = wx.Button( self, wx.ID_ANY, u"Reset to Defaults", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer28.Add( self.bReset, 0, wx.ALL, 5 )
+
+
+		bSizer33.Add( bSizer28, 1, wx.ALIGN_RIGHT, 5 )
+
+
+		self.SetSizer( bSizer33 )
+		self.Layout()
+
+		self.Centre( wx.BOTH )
+
+		# Connect Events
+		self.c_Board.Bind( wx.EVT_CHOICE, self.doChangeBoard )
+		self.cfg_p10.Bind( wx.EVT_CHOICE, self.doChange )
+		self.cfg_p11.Bind( wx.EVT_CHOICE, self.doChange )
+		self.cfg_p12.Bind( wx.EVT_CHOICE, self.doChange )
+		self.cfg_p13.Bind( wx.EVT_CHOICE, self.doChange )
+		self.cfg_p14.Bind( wx.EVT_CHOICE, self.doChange )
+		self.cfg_p15.Bind( wx.EVT_CHOICE, self.doChange )
+		self.cfg_p16.Bind( wx.EVT_CHOICE, self.doChange )
+		self.cfg_p17.Bind( wx.EVT_CHOICE, self.doChange )
+		self.cfg_p20.Bind( wx.EVT_CHOICE, self.doChange )
+		self.cfg_p21.Bind( wx.EVT_CHOICE, self.doChange )
+		self.cfg_p22.Bind( wx.EVT_CHOICE, self.doChange )
+		self.cfg_p23.Bind( wx.EVT_CHOICE, self.doChange )
+		self.cfg_p24.Bind( wx.EVT_CHOICE, self.doChange )
+		self.cfg_p25.Bind( wx.EVT_CHOICE, self.doChange )
+		self.cfg_p26.Bind( wx.EVT_CHOICE, self.doChange )
+		self.cfg_p27.Bind( wx.EVT_CHOICE, self.doChange )
+		self.bApply.Bind( wx.EVT_BUTTON, self.doApply )
+		self.bCancel.Bind( wx.EVT_BUTTON, self.doCancel )
+		self.bReset.Bind( wx.EVT_BUTTON, self.doReset )
+
+	def __del__( self ):
+		pass
+
+
+	# Virtual event handlers, override them in your derived class
+	def doChangeBoard( self, event ):
+		event.Skip()
+
+	def doChange( self, event ):
+		event.Skip()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	def doApply( self, event ):
+		event.Skip()
+
+	def doCancel( self, event ):
+		event.Skip()
+
+	def doReset( self, event ):
+		event.Skip()
+
+
+###########################################################################
+## Class FT232R_Pin_Config
+###########################################################################
+
+class FT232R_Pin_Config ( wx.Dialog ):
+
+	def __init__( self, parent ):
+		wx.Dialog.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, pos = wx.DefaultPosition, size = wx.Size( 380,565 ), style = wx.DEFAULT_DIALOG_STYLE )
+
+		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
+
+		bSizer33 = wx.BoxSizer( wx.VERTICAL )
+
+		bSizer29 = wx.BoxSizer( wx.HORIZONTAL )
+
+		self.l_Board = wx.StaticText( self, wx.ID_ANY, u"Board:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.l_Board.Wrap( -1 )
+
+		self.l_Board.SetFont( wx.Font( 14, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, wx.EmptyString ) )
+		self.l_Board.SetMinSize( wx.Size( 72,20 ) )
+
+		bSizer29.Add( self.l_Board, 1, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+
+		c_BoardChoices = []
+		self.c_Board = wx.Choice( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, c_BoardChoices, 0 )
+		self.c_Board.SetSelection( 0 )
+		bSizer29.Add( self.c_Board, 0, wx.ALL|wx.ALIGN_RIGHT|wx.ALIGN_CENTER_VERTICAL, 5 )
+
+
+		bSizer33.Add( bSizer29, 0, wx.ALIGN_RIGHT, 5 )
+
+		bSizer27 = wx.BoxSizer( wx.HORIZONTAL )
+
+		bSizer36 = wx.BoxSizer( wx.VERTICAL )
+
+		bSizer42 = wx.BoxSizer( wx.HORIZONTAL )
+
+		self.l_tdi = wx.StaticText( self, wx.ID_ANY, u"TDI:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.l_tdi.Wrap( -1 )
+
+		self.l_tdi.SetFont( wx.Font( 14, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, wx.EmptyString ) )
+		self.l_tdi.SetMinSize( wx.Size( 60,20 ) )
+
+		bSizer42.Add( self.l_tdi, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+
+		cfg_tdiChoices = [ u"TX", u"RX", u"RTS", u"CTS", u"DTR", u"DSR", u"DCD", u"RI" ]
+		self.cfg_tdi = wx.Choice( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, cfg_tdiChoices, 0 )
+		self.cfg_tdi.SetSelection( 1 )
+		bSizer42.Add( self.cfg_tdi, 0, wx.ALL|wx.ALIGN_RIGHT, 5 )
+
+
+		bSizer36.Add( bSizer42, 0, wx.ALIGN_RIGHT, 5 )
+
+		self.m_staticline1 = wx.StaticLine( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL )
+		bSizer36.Add( self.m_staticline1, 0, wx.EXPAND |wx.ALL, 5 )
+
+		bSizer421 = wx.BoxSizer( wx.HORIZONTAL )
+
+		self.l_tdo = wx.StaticText( self, wx.ID_ANY, u"TDO:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.l_tdo.Wrap( -1 )
+
+		self.l_tdo.SetFont( wx.Font( 14, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, wx.EmptyString ) )
+		self.l_tdo.SetMinSize( wx.Size( 60,20 ) )
+
+		bSizer421.Add( self.l_tdo, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+
+		cfg_tdoChoices = [ u"TX", u"RX", u"RTS", u"CTS", u"DTR", u"DSR", u"DCD", u"RI" ]
+		self.cfg_tdo = wx.Choice( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, cfg_tdoChoices, 0 )
+		self.cfg_tdo.SetSelection( 2 )
+		bSizer421.Add( self.cfg_tdo, 0, wx.ALL|wx.ALIGN_RIGHT, 5 )
+
+
+		bSizer36.Add( bSizer421, 0, wx.ALIGN_RIGHT, 5 )
+
+		self.m_staticline2 = wx.StaticLine( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL )
+		bSizer36.Add( self.m_staticline2, 0, wx.EXPAND |wx.ALL, 5 )
+
+		bSizer422 = wx.BoxSizer( wx.HORIZONTAL )
+
+		self.l_tms = wx.StaticText( self, wx.ID_ANY, u"TMS:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.l_tms.Wrap( -1 )
+
+		self.l_tms.SetFont( wx.Font( 14, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, wx.EmptyString ) )
+		self.l_tms.SetMinSize( wx.Size( 60,20 ) )
+
+		bSizer422.Add( self.l_tms, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+
+		cfg_tmsChoices = [ u"TX", u"RX", u"RTS", u"CTS", u"DTR", u"DSR", u"DCD", u"RI" ]
+		self.cfg_tms = wx.Choice( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, cfg_tmsChoices, 0 )
+		self.cfg_tms.SetSelection( 3 )
+		bSizer422.Add( self.cfg_tms, 0, wx.ALL|wx.ALIGN_RIGHT, 5 )
+
+
+		bSizer36.Add( bSizer422, 0, wx.ALIGN_RIGHT, 5 )
+
+		self.m_staticline3 = wx.StaticLine( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL )
+		bSizer36.Add( self.m_staticline3, 0, wx.EXPAND |wx.ALL, 5 )
+
+		bSizer423 = wx.BoxSizer( wx.HORIZONTAL )
+
+		self.l_tck = wx.StaticText( self, wx.ID_ANY, u"TCK:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.l_tck.Wrap( -1 )
+
+		self.l_tck.SetFont( wx.Font( 14, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, wx.EmptyString ) )
+		self.l_tck.SetMinSize( wx.Size( 60,20 ) )
+
+		bSizer423.Add( self.l_tck, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+
+		cfg_tckChoices = [ u"TX", u"RX", u"RTS", u"CTS", u"DTR", u"DSR", u"DCD", u"RI" ]
+		self.cfg_tck = wx.Choice( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, cfg_tckChoices, 0 )
+		self.cfg_tck.SetSelection( 0 )
+		bSizer423.Add( self.cfg_tck, 0, wx.ALL|wx.ALIGN_RIGHT, 5 )
+
+
+		bSizer36.Add( bSizer423, 0, wx.ALIGN_RIGHT, 5 )
+
+		self.m_staticline4 = wx.StaticLine( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL )
+		bSizer36.Add( self.m_staticline4, 0, wx.EXPAND |wx.ALL, 5 )
+
+		bSizer424 = wx.BoxSizer( wx.HORIZONTAL )
+
+		self.l_trst = wx.StaticText( self, wx.ID_ANY, u"TRST:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.l_trst.Wrap( -1 )
+
+		self.l_trst.SetFont( wx.Font( 14, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, wx.EmptyString ) )
+		self.l_trst.SetMinSize( wx.Size( 60,20 ) )
+
+		bSizer424.Add( self.l_trst, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+
+		cfg_trstChoices = [ u"TX", u"RX", u"RTS", u"CTS", u"DTR", u"DSR", u"DCD", u"RI" ]
+		self.cfg_trst = wx.Choice( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, cfg_trstChoices, 0 )
+		self.cfg_trst.SetSelection( 4 )
+		bSizer424.Add( self.cfg_trst, 0, wx.ALL|wx.ALIGN_RIGHT, 5 )
+
+
+		bSizer36.Add( bSizer424, 0, wx.ALIGN_RIGHT, 5 )
+
+		self.m_staticline5 = wx.StaticLine( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL )
+		bSizer36.Add( self.m_staticline5, 0, wx.EXPAND |wx.ALL, 5 )
+
+		bSizer425 = wx.BoxSizer( wx.HORIZONTAL )
+
+		self.l_srst = wx.StaticText( self, wx.ID_ANY, u"SRST:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.l_srst.Wrap( -1 )
+
+		self.l_srst.SetFont( wx.Font( 14, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, wx.EmptyString ) )
+		self.l_srst.SetMinSize( wx.Size( 60,20 ) )
+
+		bSizer425.Add( self.l_srst, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+
+		cfg_srstChoices = [ u"TX", u"RX", u"RTS", u"CTS", u"DTR", u"DSR", u"DCD", u"RI" ]
+		self.cfg_srst = wx.Choice( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, cfg_srstChoices, 0 )
+		self.cfg_srst.SetSelection( 6 )
+		bSizer425.Add( self.cfg_srst, 0, wx.ALL|wx.ALIGN_RIGHT, 5 )
+
+
+		bSizer36.Add( bSizer425, 0, wx.ALIGN_RIGHT, 5 )
+
+		self.m_staticline6 = wx.StaticLine( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL )
+		bSizer36.Add( self.m_staticline6, 0, wx.EXPAND |wx.ALL, 5 )
+
+
+		bSizer27.Add( bSizer36, 1, wx.EXPAND|wx.ALIGN_CENTER_VERTICAL, 5 )
+
+		self.board = wx.StaticBitmap( self, wx.ID_ANY, wx.NullBitmap, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.board.SetMaxSize( wx.Size( 250,440 ) )
+
+		bSizer27.Add( self.board, 1, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+
+
+		bSizer33.Add( bSizer27, 1, wx.EXPAND|wx.ALIGN_RIGHT, 5 )
+
+		bSizer28 = wx.BoxSizer( wx.HORIZONTAL )
+
+		self.bApply = wx.Button( self, wx.ID_ANY, u"Apply", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer28.Add( self.bApply, 0, wx.ALL, 5 )
+
+		self.bCancel = wx.Button( self, wx.ID_ANY, u"Cancel", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer28.Add( self.bCancel, 0, wx.ALL, 5 )
+
+		self.bReset = wx.Button( self, wx.ID_ANY, u"Reset to Defaults", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer28.Add( self.bReset, 0, wx.ALL, 5 )
+
+
+		bSizer33.Add( bSizer28, 1, wx.ALIGN_RIGHT, 5 )
+
+
+		self.SetSizer( bSizer33 )
+		self.Layout()
+
+		self.Centre( wx.BOTH )
+
+		# Connect Events
+		self.c_Board.Bind( wx.EVT_CHOICE, self.doChangeBoard )
+		self.cfg_tdi.Bind( wx.EVT_CHOICE, self.doChange )
+		self.cfg_tdo.Bind( wx.EVT_CHOICE, self.doChange )
+		self.cfg_tms.Bind( wx.EVT_CHOICE, self.doChange )
+		self.cfg_tck.Bind( wx.EVT_CHOICE, self.doChange )
+		self.cfg_trst.Bind( wx.EVT_CHOICE, self.doChange )
+		self.cfg_srst.Bind( wx.EVT_CHOICE, self.doChange )
+		self.bApply.Bind( wx.EVT_BUTTON, self.doApply )
+		self.bCancel.Bind( wx.EVT_BUTTON, self.doCancel )
+		self.bReset.Bind( wx.EVT_BUTTON, self.doReset )
+
+	def __del__( self ):
+		pass
+
+
+	# Virtual event handlers, override them in your derived class
+	def doChangeBoard( self, event ):
+		event.Skip()
+
+	def doChange( self, event ):
+		event.Skip()
+
+
+
+
+
+
+	def doApply( self, event ):
+		event.Skip()
+
+	def doCancel( self, event ):
+		event.Skip()
+
+	def doReset( self, event ):
+		event.Skip()
+
+
+###########################################################################
+## Class ResetDelayConfig
+###########################################################################
+
+class ResetDelayConfig ( wx.Dialog ):
+
+	def __init__( self, parent ):
+		wx.Dialog.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, pos = wx.DefaultPosition, size = wx.DefaultSize, style = wx.DEFAULT_DIALOG_STYLE )
+
+		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
+
+		bSizer59 = wx.BoxSizer( wx.VERTICAL )
+
+		bSizer58 = wx.BoxSizer( wx.HORIZONTAL )
+
+		self.lnTRSTWidth = wx.StaticText( self, wx.ID_ANY, u"nTRST Pulse Width:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.lnTRSTWidth.Wrap( -1 )
+
+		bSizer58.Add( self.lnTRSTWidth, 1, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+
+		self.nNTRSTWidth = wx.SpinCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 1000, 0 )
+		bSizer58.Add( self.nNTRSTWidth, 0, wx.ALL, 5 )
+
+
+		bSizer59.Add( bSizer58, 1, wx.EXPAND, 5 )
+
+		bSizer581 = wx.BoxSizer( wx.HORIZONTAL )
+
+		self.lnSRSTWidth = wx.StaticText( self, wx.ID_ANY, u"nSRST Pulse Width:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.lnSRSTWidth.Wrap( -1 )
+
+		bSizer581.Add( self.lnSRSTWidth, 1, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+
+		self.nSRSTWidth = wx.SpinCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 1000, 0 )
+		bSizer581.Add( self.nSRSTWidth, 0, wx.ALL, 5 )
+
+
+		bSizer59.Add( bSizer581, 1, wx.EXPAND, 5 )
+
+		bSizer582 = wx.BoxSizer( wx.HORIZONTAL )
+
+		self.lNTRSTDelay = wx.StaticText( self, wx.ID_ANY, u"nTRST Delay:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.lNTRSTDelay.Wrap( -1 )
+
+		bSizer582.Add( self.lNTRSTDelay, 1, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+
+		self.nNTRSTDelay = wx.SpinCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 1000, 0 )
+		bSizer582.Add( self.nNTRSTDelay, 0, wx.ALL, 5 )
+
+
+		bSizer59.Add( bSizer582, 1, wx.EXPAND, 5 )
+
+		bSizer583 = wx.BoxSizer( wx.HORIZONTAL )
+
+		self.lSRSTDelay = wx.StaticText( self, wx.ID_ANY, u"nSRST Delay:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.lSRSTDelay.Wrap( -1 )
+
+		bSizer583.Add( self.lSRSTDelay, 1, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+
+		self.nSRSTDelay = wx.SpinCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 1000, 0 )
+		bSizer583.Add( self.nSRSTDelay, 0, wx.ALL, 5 )
+
+
+		bSizer59.Add( bSizer583, 1, wx.EXPAND, 5 )
+
+		bSizer584 = wx.BoxSizer( wx.HORIZONTAL )
+
+		self.lnResetDelay = wx.StaticText( self, wx.ID_ANY, u"Reset Delay", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.lnResetDelay.Wrap( -1 )
+
+		bSizer584.Add( self.lnResetDelay, 1, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+
+		self.nResetDelay = wx.SpinCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 1000, 0 )
+		bSizer584.Add( self.nResetDelay, 0, wx.ALL, 5 )
+
+
+		bSizer59.Add( bSizer584, 1, wx.EXPAND, 5 )
+
+		bSizer5842 = wx.BoxSizer( wx.HORIZONTAL )
+
+		self.cUseCustom = wx.CheckBox( self, wx.ID_ANY, u"Use Custom Timings", wx.DefaultPosition, wx.DefaultSize, wx.ALIGN_RIGHT )
+		bSizer5842.Add( self.cUseCustom, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+
+
+		bSizer59.Add( bSizer5842, 1, wx.ALIGN_RIGHT, 5 )
+
+		bSizer5841 = wx.BoxSizer( wx.HORIZONTAL )
+
+		self.bApply = wx.Button( self, wx.ID_ANY, u"Apply", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer5841.Add( self.bApply, 0, wx.ALL, 5 )
+
+		self.bCancel = wx.Button( self, wx.ID_ANY, u"Cancel", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer5841.Add( self.bCancel, 0, wx.ALL, 5 )
+
+
+		bSizer59.Add( bSizer5841, 1, wx.ALIGN_RIGHT, 5 )
+
+
+		self.SetSizer( bSizer59 )
+		self.Layout()
+		bSizer59.Fit( self )
+
+		self.Centre( wx.BOTH )
+
+		# Connect Events
+		self.bApply.Bind( wx.EVT_BUTTON, self.bDoApply )
+		self.bCancel.Bind( wx.EVT_BUTTON, self.bDoCancel )
+
+	def __del__( self ):
+		pass
+
+
+	# Virtual event handlers, override them in your derived class
+	def bDoApply( self, event ):
+		event.Skip()
+
+	def bDoCancel( self, event ):
+		event.Skip()
+
+
+###########################################################################
+## Class NANDControllerConfig
+###########################################################################
+
+class NANDControllerConfig ( wx.Dialog ):
+
+	def __init__( self, parent ):
+		wx.Dialog.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, pos = wx.DefaultPosition, size = wx.Size( 410,240 ), style = wx.DEFAULT_DIALOG_STYLE )
+
+		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
+
+		bSizer65 = wx.BoxSizer( wx.VERTICAL )
+
+		bSizer68 = wx.BoxSizer( wx.HORIZONTAL )
+
+		bSizer70 = wx.BoxSizer( wx.VERTICAL )
+
+		bSizer69 = wx.BoxSizer( wx.HORIZONTAL )
+
+		self.lPageWidth = wx.StaticText( self, wx.ID_ANY, u"Page Width:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.lPageWidth.Wrap( -1 )
+
+		bSizer69.Add( self.lPageWidth, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+
+		cPageWidthChoices = [ u"Auto", u"8-bit", u"16-bit" ]
+		self.cPageWidth = wx.Choice( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, cPageWidthChoices, 0 )
+		self.cPageWidth.SetSelection( 0 )
+		bSizer69.Add( self.cPageWidth, 0, wx.ALL, 5 )
+
+
+		bSizer70.Add( bSizer69, 0, wx.EXPAND, 5 )
+
+		bSizer691 = wx.BoxSizer( wx.HORIZONTAL )
+
+		self.bSkipRegInit = wx.CheckBox( self, wx.ID_ANY, u"Skip Register Init:", wx.DefaultPosition, wx.DefaultSize, wx.ALIGN_RIGHT )
+		bSizer691.Add( self.bSkipRegInit, 1, wx.ALL, 5 )
+
+
+		bSizer70.Add( bSizer691, 0, wx.EXPAND, 5 )
+
+		bSizer6911 = wx.BoxSizer( wx.HORIZONTAL )
+
+		self.bSkipGPIOInit = wx.CheckBox( self, wx.ID_ANY, u"Skip GPIO Init\n(MSM62XX only):", wx.DefaultPosition, wx.DefaultSize, wx.ALIGN_RIGHT )
+		bSizer6911.Add( self.bSkipGPIOInit, 1, wx.ALL, 5 )
+
+
+		bSizer70.Add( bSizer6911, 1, wx.EXPAND, 5 )
+
+
+		bSizer68.Add( bSizer70, 1, 0, 5 )
+
+		bSizer701 = wx.BoxSizer( wx.VERTICAL )
+
+		bSizer692 = wx.BoxSizer( wx.HORIZONTAL )
+
+		self.lCustomCFG1 = wx.StaticText( self, wx.ID_ANY, u"CFG1:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.lCustomCFG1.Wrap( -1 )
+
+		bSizer692.Add( self.lCustomCFG1, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+
+		self.tCustomCFG1 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer692.Add( self.tCustomCFG1, 1, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+
+
+		bSizer701.Add( bSizer692, 0, wx.EXPAND, 5 )
+
+		bSizer6912 = wx.BoxSizer( wx.HORIZONTAL )
+
+		self.lCustomCFG2 = wx.StaticText( self, wx.ID_ANY, u"CFG2:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.lCustomCFG2.Wrap( -1 )
+
+		bSizer6912.Add( self.lCustomCFG2, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+
+		self.tCustomCFG2 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer6912.Add( self.tCustomCFG2, 1, wx.ALL, 5 )
+
+
+		bSizer701.Add( bSizer6912, 0, wx.EXPAND, 5 )
+
+		bSizer69111 = wx.BoxSizer( wx.HORIZONTAL )
+
+		self.lCustomCFGCMN = wx.StaticText( self, wx.ID_ANY, u"Common\nCFG:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.lCustomCFGCMN.Wrap( -1 )
+
+		bSizer69111.Add( self.lCustomCFGCMN, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+
+		self.tCustomCFGCMN = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer69111.Add( self.tCustomCFGCMN, 1, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+
+
+		bSizer701.Add( bSizer69111, 0, wx.EXPAND, 5 )
+
+		bSizer691111 = wx.BoxSizer( wx.HORIZONTAL )
+
+		self.bCodeEdit = wx.Button( self, wx.ID_ANY, u"Edit Init Code", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer691111.Add( self.bCodeEdit, 0, wx.ALL, 5 )
+
+
+		bSizer701.Add( bSizer691111, 1, wx.ALIGN_RIGHT, 5 )
+
+
+		bSizer68.Add( bSizer701, 1, wx.EXPAND, 5 )
+
+
+		bSizer65.Add( bSizer68, 1, wx.EXPAND, 5 )
+
+		bSizer66 = wx.BoxSizer( wx.HORIZONTAL )
+
+		self.bApply = wx.Button( self, wx.ID_ANY, u"Apply", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer66.Add( self.bApply, 0, wx.ALL, 5 )
+
+		self.bCancel = wx.Button( self, wx.ID_ANY, u"Cancel", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer66.Add( self.bCancel, 0, wx.ALL, 5 )
+
+
+		bSizer65.Add( bSizer66, 0, wx.ALIGN_RIGHT, 5 )
+
+
+		self.SetSizer( bSizer65 )
+		self.Layout()
+
+		self.Centre( wx.BOTH )
+
+		# Connect Events
+		self.bCodeEdit.Bind( wx.EVT_BUTTON, self.doCodeEdit )
+		self.bApply.Bind( wx.EVT_BUTTON, self.doApply )
+		self.bCancel.Bind( wx.EVT_BUTTON, self.doCancel )
+
+	def __del__( self ):
+		pass
+
+
+	# Virtual event handlers, override them in your derived class
+	def doCodeEdit( self, event ):
+		event.Skip()
+
+	def doApply( self, event ):
+		event.Skip()
+
+	def doCancel( self, event ):
+		event.Skip()
+
+
+###########################################################################
+## Class NANDCodeEdit
+###########################################################################
+
+class NANDCodeEdit ( wx.Dialog ):
+
+	def __init__( self, parent ):
+		wx.Dialog.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, pos = wx.DefaultPosition, size = wx.Size( 640,480 ), style = wx.DEFAULT_DIALOG_STYLE )
+
+		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
+
+		bSizer99 = wx.BoxSizer( wx.VERTICAL )
+
+		self.tTCLCode = wx.stc.StyledTextCtrl( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0)
+		self.tTCLCode.SetUseTabs ( True )
+		self.tTCLCode.SetTabWidth ( 4 )
+		self.tTCLCode.SetIndent ( 4 )
+		self.tTCLCode.SetTabIndents( True )
+		self.tTCLCode.SetBackSpaceUnIndents( True )
+		self.tTCLCode.SetViewEOL( False )
+		self.tTCLCode.SetViewWhiteSpace( False )
+		self.tTCLCode.SetMarginWidth( 2, 0 )
+		self.tTCLCode.SetIndentationGuides( True )
+		self.tTCLCode.SetReadOnly( False );
+		self.tTCLCode.SetMarginType ( 1, wx.stc.STC_MARGIN_SYMBOL )
+		self.tTCLCode.SetMarginMask ( 1, wx.stc.STC_MASK_FOLDERS )
+		self.tTCLCode.SetMarginWidth ( 1, 16)
+		self.tTCLCode.SetMarginSensitive( 1, True )
+		self.tTCLCode.SetProperty ( "fold", "1" )
+		self.tTCLCode.SetFoldFlags ( wx.stc.STC_FOLDFLAG_LINEBEFORE_CONTRACTED | wx.stc.STC_FOLDFLAG_LINEAFTER_CONTRACTED );
+		self.tTCLCode.SetMarginType( 0, wx.stc.STC_MARGIN_NUMBER );
+		self.tTCLCode.SetMarginWidth( 0, self.tTCLCode.TextWidth( wx.stc.STC_STYLE_LINENUMBER, "_99999" ) )
+		self.tTCLCode.MarkerDefine( wx.stc.STC_MARKNUM_FOLDER, wx.stc.STC_MARK_BOXPLUS )
+		self.tTCLCode.MarkerSetBackground( wx.stc.STC_MARKNUM_FOLDER, wx.BLACK)
+		self.tTCLCode.MarkerSetForeground( wx.stc.STC_MARKNUM_FOLDER, wx.WHITE)
+		self.tTCLCode.MarkerDefine( wx.stc.STC_MARKNUM_FOLDEROPEN, wx.stc.STC_MARK_BOXMINUS )
+		self.tTCLCode.MarkerSetBackground( wx.stc.STC_MARKNUM_FOLDEROPEN, wx.BLACK )
+		self.tTCLCode.MarkerSetForeground( wx.stc.STC_MARKNUM_FOLDEROPEN, wx.WHITE )
+		self.tTCLCode.MarkerDefine( wx.stc.STC_MARKNUM_FOLDERSUB, wx.stc.STC_MARK_EMPTY )
+		self.tTCLCode.MarkerDefine( wx.stc.STC_MARKNUM_FOLDEREND, wx.stc.STC_MARK_BOXPLUS )
+		self.tTCLCode.MarkerSetBackground( wx.stc.STC_MARKNUM_FOLDEREND, wx.BLACK )
+		self.tTCLCode.MarkerSetForeground( wx.stc.STC_MARKNUM_FOLDEREND, wx.WHITE )
+		self.tTCLCode.MarkerDefine( wx.stc.STC_MARKNUM_FOLDEROPENMID, wx.stc.STC_MARK_BOXMINUS )
+		self.tTCLCode.MarkerSetBackground( wx.stc.STC_MARKNUM_FOLDEROPENMID, wx.BLACK)
+		self.tTCLCode.MarkerSetForeground( wx.stc.STC_MARKNUM_FOLDEROPENMID, wx.WHITE)
+		self.tTCLCode.MarkerDefine( wx.stc.STC_MARKNUM_FOLDERMIDTAIL, wx.stc.STC_MARK_EMPTY )
+		self.tTCLCode.MarkerDefine( wx.stc.STC_MARKNUM_FOLDERTAIL, wx.stc.STC_MARK_EMPTY )
+		self.tTCLCode.SetSelBackground( True, wx.SystemSettings.GetColour(wx.SYS_COLOUR_HIGHLIGHT ) )
+		self.tTCLCode.SetSelForeground( True, wx.SystemSettings.GetColour(wx.SYS_COLOUR_HIGHLIGHTTEXT ) )
+		bSizer99.Add( self.tTCLCode, 1, wx.EXPAND |wx.ALL, 5 )
+
+		gSizer4 = wx.GridSizer( 0, 2, 0, 0 )
+
+		self.bApply = wx.Button( self, wx.ID_ANY, u"Apply", wx.DefaultPosition, wx.DefaultSize, 0 )
+		gSizer4.Add( self.bApply, 0, wx.ALL, 5 )
+
+		self.bCancel = wx.Button( self, wx.ID_ANY, u"Cancel", wx.DefaultPosition, wx.DefaultSize, 0 )
+		gSizer4.Add( self.bCancel, 0, wx.ALL|wx.ALIGN_RIGHT, 5 )
+
+
+		bSizer99.Add( gSizer4, 0, wx.EXPAND, 5 )
+
+
+		self.SetSizer( bSizer99 )
+		self.Layout()
+
+		self.Centre( wx.BOTH )
+
+		# Connect Events
+		self.bApply.Bind( wx.EVT_BUTTON, self.doApply )
+		self.bCancel.Bind( wx.EVT_BUTTON, self.doCancel )
+
+	def __del__( self ):
+		pass
+
+
+	# Virtual event handlers, override them in your derived class
+	def doApply( self, event ):
+		event.Skip()
+
+	def doCancel( self, event ):
 		event.Skip()
 
 

@@ -29,6 +29,7 @@ import platform
 import intelhex
 import datetime
 import random
+import pathlib
 from controller import qcom_nandregs
 from controller import common_nandregs
 
@@ -2122,7 +2123,10 @@ class MainApp(main.main):
             self.lCurrentDCC.SetLabel(f"DCC Loader: {self._loaded_dcc}")
 
     def doScript(self, event):
-        event.Skip()
+        with wx.FileDialog(self, "Load Script", wildcard="TCL Script|*.tcl", style=wx.FD_OPEN) as fd:
+            fd: wx.FileDialog
+            if fd.ShowModal() != wx.ID_CANCEL:
+                self._ocdSendCommand(f"script \"{pathlib.Path(fd.GetPath()).as_posix()}\"")
 
     def doDisableMMU(self, event):
         if not self._isConnect and not self._isConnectRemote:
